@@ -61,23 +61,42 @@ public class MyOSC : MonoBehaviour
 
         if (spinLockNb == 0)
         {
-            float valueCombine1 = currentValue1 += value;
-            spinLockText1.text = valueCombine1.ToString();
+            currentValue1 += value;
+            
+            if (currentValue1 > 9) {
+                currentValue1 = 0;
+            } else if (currentValue1 < 0) {
+                currentValue1 = 9;
+            }
+            spinLockText1.text = currentValue1.ToString();
+            Debug.Log(currentValue1);
         }
         else if (spinLockNb == 1)
         {
-            float valueCombine2 = currentValue2 += value;
-            spinLockText2.text = valueCombine2.ToString();
+            currentValue2 += value;
+            
+            if (currentValue2 > 9) {
+                currentValue2 = 0;
+            } else if (currentValue2 < 0) {
+                currentValue2 = 9;
+            }
+            spinLockText2.text = currentValue2.ToString();
+            Debug.Log(currentValue2);
+
         }
         else if (spinLockNb == 2)
         {
-            float valueCombine3 = currentValue3 += value;
-            spinLockText3.text = valueCombine3.ToString();
+            currentValue3 += value;
+            
+            if (currentValue3 > 9) {
+                currentValue3 = 0;
+            } else if (currentValue3 < 0) {
+                currentValue3 = 9;
+            }
+            spinLockText3.text = currentValue3.ToString();
+            Debug.Log(currentValue3);
+
         }
-
-
-
-
             prevValue3 = value;
     }
 
@@ -108,7 +127,7 @@ public class MyOSC : MonoBehaviour
             }
         }
 
-        prevValue = value;
+        prevValue2 = value;
         spinLockSelector.transform.position = new Vector3(spinLockXpos, -3f, 0);
 
     }
