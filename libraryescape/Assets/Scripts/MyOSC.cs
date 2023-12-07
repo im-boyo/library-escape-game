@@ -52,6 +52,10 @@ public class MyOSC : MonoBehaviour
     float left;
     float yellow1;
     float yellow2;
+    public AudioSource symbolSound;
+    public AudioSource safeSound;
+    public AudioSource lockSound;
+    public AudioSource droneSound;
 
 
     public static float ScaleValue(float value, float inputMin, float inputMax, float outputMin, float outputMax)
@@ -89,7 +93,7 @@ public class MyOSC : MonoBehaviour
             return;
         }
 
-        if (value <= 800)
+        if (value <= 400)
         {
             dimmer.SetActive(true);
         } else
@@ -125,6 +129,7 @@ public class MyOSC : MonoBehaviour
             else if (coffre.activeSelf == false)
             {
                 coffre.SetActive(true);
+                cadenas.SetActive(false);
             }
         }
 
@@ -155,7 +160,8 @@ public class MyOSC : MonoBehaviour
                 cadenas.SetActive(false);
             } else if (cadenas.activeSelf == false) 
             { 
-                cadenas.SetActive(true); 
+                cadenas.SetActive(true);
+                coffre.SetActive(false);
             }
         }
 
@@ -183,6 +189,7 @@ public class MyOSC : MonoBehaviour
         if (value == 1)
         {
             black.gameObject.SetActive(false);
+            droneSound.Play();
         }
 
     }
@@ -367,7 +374,7 @@ public class MyOSC : MonoBehaviour
         if (value == 1 && value != prevValue)
         {
             count++;
-            number.text = count.ToString();
+
         }
 
         prevValue = value;
@@ -394,19 +401,24 @@ public class MyOSC : MonoBehaviour
             if (count == 9)
             {
                 Answer1.gameObject.SetActive(true);
+                symbolSound.Play();
                 count = 0;
             } else
             {
                 count = 0;
             }
 
-            if (currentValue1 == 1 &&  currentValue2 == 1 && currentValue3 == 1 && currentValue4 == 1 && currentValue5 == 1 && currentValue6 == 1) {
+            if (currentValue1 == 2 &&  currentValue2 == 4 && currentValue3 == 1 && currentValue4 == 9 && currentValue5 == 2 && currentValue6 == 6) {
                 win.gameObject.SetActive(true );
+                lockSound.Play();
             }
 
-            if (currentValuePad == 598)
+            if (currentValuePad == 598 && coffre.activeSelf == true)
             {
                 openSafe.gameObject.SetActive(true);
+                safeSound.Play();
+                currentValuePad = 0;
+
             }
         }
 
